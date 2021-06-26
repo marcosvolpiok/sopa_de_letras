@@ -1,6 +1,5 @@
 
 
-//Detecta si existe la palabra
 
 //Verificar si la sopa de letras tiene las lineas y filas correctas
 
@@ -9,20 +8,21 @@ function searchInSoup(soup){
     let count=0;
     row=process.argv[2];
     column=process.argv[3];
+    const arrWord=['EIO', 'OIE'];
 
     const arrLinesHorizontal = convertHorizontal(soup);
-    count = count + detectRegex(arrLinesHorizontal);
+    count = count + detectRegex(arrLinesHorizontal, arrWord);
 
 
     const arrLinesVertical = convertVertical(soup, row, column);
-    count = count + detectRegex(arrLinesVertical);
+    count = count + detectRegex(arrLinesVertical, arrWord);
     console.log(arrLinesVertical);
 
     const arrLinesDiagonalRight = convertDiagonal(soup, row, column, 'RIGHT');
-    count = count + detectRegex(arrLinesDiagonalRight);
+    count = count + detectRegex(arrLinesDiagonalRight, arrWord);
 
     const arrLinesDiagonalLeft = convertDiagonal(soup, row, column, 'LEFT');
-    count = count + detectRegex(arrLinesDiagonalLeft);
+    count = count + detectRegex(arrLinesDiagonalLeft, arrWord);
 
     console.log('***COUNT TOTALES***', count)
     
@@ -83,21 +83,18 @@ function convertHorizontal(soup){
 }
 
 
-function detectRegex(arrLine){
+function detectRegex(arrLine, arrWord){
     let matchs=[];
 
     arrLine.forEach((line)=>{
-        const regexp = new RegExp(/EIO/g);
-        let match=[...line.matchAll(regexp)];
-        if(match.length>0){
-            matchs.push(...match);  
-        }
-
-        const regexp2 = new RegExp(/OIE/g);
-        match=[...line.matchAll(regexp2)];
-        if(match.length>0){
-            matchs.push(...match);  
-        }        
+        arrWord.forEach((word)=>{
+            const regexp = new RegExp(word, 'g');
+            
+            let match=[...line.matchAll(regexp)];
+            if(match.length>0){
+                matchs.push(...match);  
+            }
+        })      
     });
 
     return matchs.length;
