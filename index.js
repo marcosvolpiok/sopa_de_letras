@@ -6,21 +6,26 @@
 
 
 function searchInSoup(soup){
-    let count;
+    let count=0;
     row=process.argv[2];
     column=process.argv[3];
 
     const arrLinesHorizontal = convertHorizontal(soup);
     count = count + detectRegex(arrLinesHorizontal);
 
+
     const arrLinesVertical = convertVertical(soup, row, column);
+    count = count + detectRegex(arrLinesVertical);
     console.log(arrLinesVertical);
 
     const arrLinesDiagonalRight = convertDiagonal(soup, row, column, 'RIGHT');
-    console.log(arrLinesDiagonalRight);
+    count = count + detectRegex(arrLinesDiagonalRight);
 
     const arrLinesDiagonalLeft = convertDiagonal(soup, row, column, 'LEFT');
-    console.log(arrLinesDiagonalLeft);
+    count = count + detectRegex(arrLinesDiagonalLeft);
+
+    console.log('***COUNT TOTALES***', count)
+    
 }
 
 function convertVertical(soup, row, column){
@@ -79,7 +84,23 @@ function convertHorizontal(soup){
 
 
 function detectRegex(arrLine){
-    return 0;
+    let matchs=[];
+
+    arrLine.forEach((line)=>{
+        const regexp = new RegExp(/EIO/g);
+        let match=[...line.matchAll(regexp)];
+        if(match.length>0){
+            matchs.push(...match);  
+        }
+
+        const regexp2 = new RegExp(/OIE/g);
+        match=[...line.matchAll(regexp2)];
+        if(match.length>0){
+            matchs.push(...match);  
+        }        
+    });
+
+    return matchs.length;
 }
 
 
