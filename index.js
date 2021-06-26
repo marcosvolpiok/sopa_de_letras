@@ -1,14 +1,42 @@
+function verifyColumns(column, soup){
+    const arrRows=soup.split(',');
+    let columns;
+    let result=true;
 
+    arrRows.forEach((row)=>{
+        columns=row.split('').length;
 
+        if(columns!=column){
+            result = false;
+            return false;
+        }
+    })
 
-//Verificar si la sopa de letras tiene las lineas y filas correctas
+    return result;
+}
 
+function verifyRows(row, soup){
+    const arrRows=soup.split(',');
 
-function searchInSoup(soup){
+    if(arrRows.length!=row){
+        return false;
+    }
+
+    return true;
+}
+
+function searchInSoup(soup, row, column){
     let count=0;
-    row=process.argv[2];
-    column=process.argv[3];
     const arrWord=['EIO', 'OIE'];
+
+    if(!verifyRows(row, soup)){
+        return `Verifique el número de filas. En la sopa hay ${soup.split(',').length}, pero se declararon ${row}`;
+    }
+
+    if(!verifyColumns(column, soup)){
+        return `Verifique el número de columnas.`;
+    }
+
 
     const arrLinesHorizontal = convertHorizontal(soup);
     count = count + detectRegex(arrLinesHorizontal, arrWord);
@@ -16,7 +44,6 @@ function searchInSoup(soup){
 
     const arrLinesVertical = convertVertical(soup, row, column);
     count = count + detectRegex(arrLinesVertical, arrWord);
-    console.log(arrLinesVertical);
 
     const arrLinesDiagonalRight = convertDiagonal(soup, row, column, 'RIGHT');
     count = count + detectRegex(arrLinesDiagonalRight, arrWord);
@@ -24,8 +51,7 @@ function searchInSoup(soup){
     const arrLinesDiagonalLeft = convertDiagonal(soup, row, column, 'LEFT');
     count = count + detectRegex(arrLinesDiagonalLeft, arrWord);
 
-    console.log('***COUNT TOTALES***', count)
-    
+    return count;
 }
 
 function convertVertical(soup, row, column){
@@ -101,4 +127,5 @@ function detectRegex(arrLine, arrWord){
 }
 
 
-searchInSoup(process.argv[4]);
+const result = searchInSoup(process.argv[4], process.argv[2], process.argv[3]);
+console.log(result);
