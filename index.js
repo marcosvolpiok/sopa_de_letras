@@ -1,11 +1,4 @@
-//Genera listas a partir de cada combinación de linea
-    //Horizontal
-    //Vertical
-    //Diagonal
-    
-    //Horizontal Al revés <--- Borrar?
-    //Vertical Al revés <--- Borrar?
-    //Diagonal Al revés <--- Borrar?
+
 
 //Detecta si existe la palabra
 
@@ -23,13 +16,11 @@ function searchInSoup(soup){
     const arrLinesVertical = convertVertical(soup, row, column);
     console.log(arrLinesVertical);
 
-    const arrLinesDiagonalRight = convertDiagonalRight(soup, row, column);
+    const arrLinesDiagonalRight = convertDiagonal(soup, row, column, 'RIGHT');
     console.log(arrLinesDiagonalRight);
 
-    const arrLinesDiagonalLeft = convertDiagonalLeft(soup, row, column);
+    const arrLinesDiagonalLeft = convertDiagonal(soup, row, column, 'LEFT');
     console.log(arrLinesDiagonalLeft);
-
-
 }
 
 function convertVertical(soup, row, column){
@@ -37,13 +28,9 @@ function convertVertical(soup, row, column){
     let lines = soup.split(',');
 
     for(let i = 0; i<row; i++){
-        console.log('Columna', lines[i], i);
         let columns=lines[i].split('');
         
         for(let j = 0; j<column; j++){
-            
-            console.log(j, columns);
-            console.log(i, j);
             if(finalLines[j]){
                 finalLines[j]+=columns[j];
             }else{
@@ -56,7 +43,7 @@ function convertVertical(soup, row, column){
     return finalLines;
 }
 
-function convertDiagonalRight(soup, row, column){
+function convertDiagonal(soup, row, column, direction){
     let finalLines=[];
 
     let lines = soup.split(',');
@@ -64,8 +51,11 @@ function convertDiagonalRight(soup, row, column){
         let columns=lines[i].split('');
 
         for(let j = 0; j<column; j++){
-            k=i+j;
-            console.log(i, j, columns[k]);
+            if(direction=='RIGHT'){
+                k=i+j;
+            }else{
+                k=j-i;
+            }
 
             if(columns[k]){
                 if(finalLines[j]){
@@ -80,29 +70,6 @@ function convertDiagonalRight(soup, row, column){
     return finalLines;
 }
 
-function convertDiagonalLeft(soup, row, column){
-    let finalLines=[];
-    
-    let lines = soup.split(',');
-    for(let i = 0; i<row; i++){
-        let columns=lines[i].split('');
-
-        for(let j = 0; j<column; j++){
-            k=j-i;
-            console.log(i, j, columns[k]);
-
-            if(columns[k]){
-                if(finalLines[j]){
-                    finalLines[j]+=columns[k];
-                }else{
-                    finalLines[j]=columns[k];
-                }
-            }
-        }
-    }
-
-    return finalLines;
-}
 
 function convertHorizontal(soup){
     arrLines=soup.split(",");
@@ -111,7 +78,7 @@ function convertHorizontal(soup){
 }
 
 
-function detectRegex(string){
+function detectRegex(arrLine){
     return 0;
 }
 
