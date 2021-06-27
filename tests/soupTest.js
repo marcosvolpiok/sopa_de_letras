@@ -16,7 +16,14 @@ describe("soup", function() {
       const res=soupOb.searchInSoup("OIE,IIX,EXE", 3, 3);
       
       expect(res).to.equal(3);
-    });    
+    });   
+    
+    it("should return 4 when search words in soup", async function() {
+      const soupOb = new soup();
+      const res=soupOb.searchInSoup("EIOIEIOEIO", 1, 10);
+      
+      expect(res).to.equal(4);
+    });  
 
     it("should return true when try to validate columns", async function() {
       const soupOb = new soup();
