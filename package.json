@@ -1,0 +1,11 @@
+{
+  "name": "soup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js 2 3 \"EIO,EIO\""
+  },
+  "author": "Marcos Volpi",
+  "license": "ISC"
+}
