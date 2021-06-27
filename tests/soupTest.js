@@ -11,6 +11,13 @@ describe("soup", function() {
       expect(res).to.equal(2);
     });
 
+    it("should return 3 when search words in soup", async function() {
+      const soupOb = new soup();
+      const res=soupOb.searchInSoup("OIE,IIX,EXE", 3, 3);
+      
+      expect(res).to.equal(3);
+    });    
+
     it("should return true when try to validate columns", async function() {
       const soupOb = new soup();
       const res=soupOb.verifyColumns(3, "EIO,EIO");
