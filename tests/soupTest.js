@@ -32,6 +32,20 @@ describe("soup", function() {
       expect(res).to.equal(8);
     }); 
 
+    it("should return 3 when search words in soup", async function() {
+      const soupOb = new soup();
+      const res=soupOb.searchInSoup("OX,IO,EX,II,OX,IE,EX", 7, 2);
+      
+      expect(res).to.equal(3);
+    });
+
+    it("should return 0 when search words in soup", async function() {
+      const soupOb = new soup();
+      const res=soupOb.searchInSoup("E", 1, 1);
+      
+      expect(res).to.equal(0);
+    });
+
     it("should return true when try to validate columns", async function() {
       const soupOb = new soup();
       const res=soupOb.verifyColumns(3, "EIO,EIO");
