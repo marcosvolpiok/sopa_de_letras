@@ -81,6 +81,23 @@ describe("soup", function() {
       expect(res[0]).to.equal('EE');
       expect(res[1]).to.equal('II');
       expect(res[2]).to.equal('OO');
-      
     }); 
+
+    it("should convert diagonal into a string", async function() {
+      const soupOb = new soup();
+      const res=soupOb.convertDiagonal("EIO,EIO", 2, 3, "RIGHT");
+
+      expect(res[0]).to.equal('EI');
+      expect(res[1]).to.equal('IO');
+      expect(res[2]).to.equal('O');
+    }); 
+
+    it("should convert diagonal into a string", async function() {
+      const soupOb = new soup();
+      const res=soupOb.convertDiagonal("EIO,EIO", 2, 3, "LEFT");
+
+      expect(res[0]).to.equal('E');
+      expect(res[1]).to.equal('IE');
+      expect(res[2]).to.equal('OI');
+    });     
 });
