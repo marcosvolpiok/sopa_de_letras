@@ -7,5 +7,9 @@
     "test": "node index.js 2 3 \"EIO,EIO\""
   },
   "author": "Marcos Volpi",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.0.1"
+  }
 }
