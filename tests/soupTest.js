@@ -30,5 +30,12 @@ describe("soup", function() {
       const res=soupOb.verifyRows(2, "EIO,EIO");
       
       expect(res).to.equal(true);
-    });    
+    });
+    
+    it("should return false when try to validate rows", async function() {
+      const soupOb = new soup();
+      const res=soupOb.verifyRows(2, "EIO,EIO,xxx");
+      
+      expect(res).to.equal(false);
+    });       
 });
