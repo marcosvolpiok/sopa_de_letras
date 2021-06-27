@@ -99,5 +99,20 @@ describe("soup", function() {
       expect(res[0]).to.equal('E');
       expect(res[1]).to.equal('IE');
       expect(res[2]).to.equal('OI');
-    });     
+    }); 
+    
+    it("should convert horizontal into a string", async function() {
+      const soupOb = new soup();
+      const res=soupOb.convertHorizontal("EIO,EIO");
+
+      expect(res[0]).to.equal('EIO');
+      expect(res[1]).to.equal('EIO');
+    }); 
+
+    it("should find 2 matches", async function() {
+      const soupOb = new soup();
+      const res=soupOb.detectRegex(['EIO','EIO'], ['EIO', 'OIE']);
+
+      expect(res).to.equal(2);
+    }); 
 });
