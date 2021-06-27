@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js 2 3 \"EIO,EIO\""
+    "test": "npx mocha tests/*js"
   },
   "author": "Marcos Volpi",
   "license": "ISC",
